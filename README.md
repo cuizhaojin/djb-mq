@@ -25,11 +25,11 @@
 ### 3. 持久化队列 (queue/PersistentQueue)
   核心功能：
   基于 BlockingQueue 的内存队列
-### 4 个持久化文件：
--commit.log: 存储完整消息内容
--consumeQueue.dat: 存储消息索引（uuid + 位置 + 大小）
--index.idx: 索引文件
--offset.dat: 记录消费进度
+  4 个持久化文件：
+commit.log: 存储完整消息内容  
+consumeQueue.dat: 存储消息索引（uuid + 位置 + 大小）  
+index.idx: 索引文件  
+offset.dat: 记录消费进度  
 ### 发送消息流程：
   -1. 生成 UUID
   -2. 写入 commit.log（追加写）
