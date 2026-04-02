@@ -30,15 +30,15 @@ commit.log: 存储完整消息内容
 consumeQueue.dat: 存储消息索引（uuid + 位置 + 大小）  
 index.idx: 索引文件  
 offset.dat: 记录消费进度  
-### 发送消息流程：
-  -1. 生成 UUID
-  -2. 写入 commit.log（追加写）
-  -3. 更新 consumeQueue（记录位置信息）
-  -4. 更新 index 文件
-  -5. 放入内存队列
-消费进度管理：  
-消费成功后调用 updateOffsetFile() 记录已消费的消息 UUID  
-重启时从 offset 文件加载已消费记录，跳过已处理消息  
+### 发送消息流程：  
+  -1. 生成 UUID  
+  -2. 写入 commit.log（追加写）  
+  -3. 更新 consumeQueue（记录位置信息）  
+  -4. 更新 index 文件  
+  -5. 放入内存队列  
+消费进度管理：    
+消费成功后调用 updateOffsetFile() 记录已消费的消息 UUID    
+重启时从 offset 文件加载已消费记录，跳过已处理消息    
 ### 4. 消费者 (consumer/CustomConsumer)
   -两种消费模式：
   -模式
