@@ -3,6 +3,7 @@
 ## 🏗️ 整体架构
 ## 该 MQ 模块采用了经典的生产者 - 消费者模型，支持并发消费和顺序消费两种模式，具备消息持久化、重试机制、死信队列等功能。
 ### 目录结构：
+```
   mq/
   ├── consumer/          # 消费者实现
   ├── listener/          # 监听器注解
@@ -13,6 +14,7 @@
   ├── utils/            # 序列化工具
   ├── vo/               # 值对象
   └── TestMq.java       # 测试类
+```
 ## 🔑 核心组件
 ### 1. 消息模型 (msg/)
   Message: 基础消息类，包含 uuid、body、topic，支持序列化
@@ -56,12 +58,14 @@ offset.dat: 记录消费进度
   ✅ 优雅关闭: 通过 ExecutorManager 统一管理线程池  
 ### 5. 监听器 (listener/CustomMessageListener)
 注解定义：
+```
 @CustomMessageListener(
     topic = "myTopic",           // 订阅主题
     consumerGroup = "group1",     // 消费组
     consumeMode = ConsumeMode.ORDERLY,  // 消费模式
     selectorExpression = "*"      // 选择器表达式
 )
+```
 ### 6. 序列化工具 (utils/)
   ConcurrentMessageSerializerUtils:
   使用 ReentrantReadWriteLock 保证并发安全
