@@ -66,17 +66,17 @@ offset.dat: 记录消费进度
     selectorExpression = "*"      // 选择器表达式
 )
 ```
-### 6. 序列化工具 (utils/)
-  ConcurrentMessageSerializerUtils:
-  使用 ReentrantReadWriteLock 保证并发安全
-  支持对象序列化/反序列化
-  支持按位置读取消息
-  使用 DataOutputStream 追加写索引和偏移量
-  AppendObjectOutputStream:
-  解决 ObjectOutputStream 不能追加写入的问题
-  通过重写 writeStreamHeader() 实现
-  RoundRobinScheduler:
-  轮询调度器，用于将消息均匀分发到不同队列
+### 6. 序列化工具 (utils/)  
+  ConcurrentMessageSerializerUtils:  
+  使用 ReentrantReadWriteLock 保证并发安全  
+  支持对象序列化/反序列化  
+  支持按位置读取消息  
+  使用 DataOutputStream 追加写索引和偏移量  
+  AppendObjectOutputStream:  
+  解决 ObjectOutputStream 不能追加写入的问题  
+  通过重写 writeStreamHeader() 实现  
+  RoundRobinScheduler:  
+  轮询调度器，用于将消息均匀分发到不同队列  
 ### 7. 监控线程 (thread/Monitor)
   -监控指标：
   -队列大小
