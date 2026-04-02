@@ -1,7 +1,7 @@
-## 这是一个自定义的持久化消息队列中间件，参考了 RocketMQ 的设计思想。以下是详细分析：
+### 这是一个自定义的持久化消息队列中间件，参考了 RocketMQ 的设计思想。以下是详细分析：
  
-## 🏗️ 整体架构
-## 该 MQ 模块采用了经典的生产者 - 消费者模型，支持并发消费和顺序消费两种模式，具备消息持久化、重试机制、死信队列等功能。
+### 🏗️ 整体架构
+### 该 MQ 模块采用了经典的生产者 - 消费者模型，支持并发消费和顺序消费两种模式，具备消息持久化、重试机制、死信队列等功能。
 ### 目录结构：
 ```
   mq/
@@ -17,14 +17,14 @@
 ```
 ## 🔑 核心组件
 ### 1. 消息模型 (msg/)
-  Message: 基础消息类，包含 uuid、body、topic，支持序列化
-  MqMsg: 扩展消息类，增加业务字段（tag、项目编号、主键列表、表名）
+  Message: 基础消息类，包含 uuid、body、topic，支持序列化  
+  MqMsg: 扩展消息类，增加业务字段（tag、项目编号、主键列表、表名）  
 ### 2. 主题管理 (topic/)
-  Topic: 主题类，管理多个队列（支持多队列和单队列模式）
-  TopicManager: Spring 组件，管理所有 Topic 和 Consumer 的映射关系
-### 3. 持久化队列 (queue/PersistentQueue)
-  核心功能：
-  基于 BlockingQueue 的内存队列
+  Topic: 主题类，管理多个队列（支持多队列和单队列模式）  
+  TopicManager: Spring 组件，管理所有 Topic 和 Consumer 的映射关系  
+### 3. 持久化队列 (queue/PersistentQueue)  
+  核心功能：  
+  基于 BlockingQueue 的内存队列  
   4 个持久化文件：
 commit.log: 存储完整消息内容  
 consumeQueue.dat: 存储消息索引（uuid + 位置 + 大小）  
@@ -36,9 +36,9 @@ offset.dat: 记录消费进度
   -3. 更新 consumeQueue（记录位置信息）
   -4. 更新 index 文件
   -5. 放入内存队列
-消费进度管理：
-消费成功后调用 updateOffsetFile() 记录已消费的消息 UUID
-重启时从 offset 文件加载已消费记录，跳过已处理消息
+消费进度管理：  
+消费成功后调用 updateOffsetFile() 记录已消费的消息 UUID  
+重启时从 offset 文件加载已消费记录，跳过已处理消息  
 ### 4. 消费者 (consumer/CustomConsumer)
   -两种消费模式：
   -模式
